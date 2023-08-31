@@ -11,12 +11,13 @@ public class GuessANumber {
     Scanner keyboard = new Scanner(System.in);
 
     System.out.println("\nWelcome to Guess A Number!");
+    secretNumber = random.nextInt(10) + 1;
     System.out.println("\nI am thinking of a number between 1 and 10.\n");
     while (keepRunning == true && numberOfGuesses < 3) {
       numberOfGuesses++;
       System.out.print("What is your guess? ");
-      secretNumber = random.nextInt(10) + 1;
       guessedNumber = keyboard.nextInt();
+      keyboard.nextLine(); // Scanner bug
       if (guessedNumber < secretNumber) {
         System.out.println("No, mine is higher.");
       } else if (guessedNumber > secretNumber) {
@@ -25,6 +26,8 @@ public class GuessANumber {
           System.out.println("Exactly! You're really good!");
           keepRunning = false;
       }
+      if (numberOfGuesses == 3 && keepRunning)
+        System.out.println("\nI was thinking of the number " + secretNumber);
     }
   }
 }
